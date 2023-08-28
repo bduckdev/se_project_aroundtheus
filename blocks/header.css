@@ -1,0 +1,13 @@
+.header {
+  margin-top: 45px;
+}
+.header__logo {
+  margin-bottom: 82px;
+}
+.header__line {
+  height: 1px;
+  border: none;
+  background: #545454;
+  opacity: 70%;
+  margin: 0;
+}
