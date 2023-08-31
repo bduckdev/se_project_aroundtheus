@@ -28,3 +28,7 @@
   width: 21px;
   height: 18px;
 }
+.card__button:hover {
+  background: transparent url("../images/button-like-hover.svg") center
+    no-repeat;
+}
