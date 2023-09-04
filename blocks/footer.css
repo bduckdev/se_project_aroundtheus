@@ -1,9 +1,11 @@
 .footer {
+  margin: 67px auto;
 }
 
 .footer__text {
   color: gray;
   font-size: 18px;
   font-weight: 400;
-  line-height: 21.78;
+  line-height: 21.78px;
+  margin: 0;
 }
