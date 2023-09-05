@@ -1,12 +1,12 @@
 .card {
   display: flex;
   flex-direction: column;
-  border-radius: 10px;
 }
 .card__image {
   width: 282px;
   height: 282px;
   border-radius: 10px 10px 0 0;
+  object-fit: cover;
 }
 .card__description {
   display: flex;
@@ -32,4 +32,5 @@
   background: transparent url("../images/button-like-hover.svg") center
     no-repeat;
   cursor: pointer;
+  opacity: 60%;
 }
