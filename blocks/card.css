@@ -31,4 +31,5 @@
 .card__button:hover {
   background: transparent url("../images/button-like-hover.svg") center
     no-repeat;
+  cursor: pointer;
 }

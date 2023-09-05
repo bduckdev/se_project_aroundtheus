@@ -35,6 +35,9 @@
   border-color: #fff;
   margin-left: 10px;
 }
+.profile__edit-button:hover {
+  cursor: pointer;
+}
 .profile__description {
   font-weight: 400;
   font-size: 18px;
@@ -50,4 +53,7 @@
   height: 50px;
   margin-left: auto;
   padding: 0;
+}
+.profile__add-button:hover {
+  cursor: pointer;
 }
