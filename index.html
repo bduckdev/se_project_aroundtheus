@@ -21,13 +21,15 @@
         <section class="profile page__section">
           <img src="./images/avatar.jpg" alt="Avatar" class="profile__avatar" />
           <div class="profile__info">
-            <h1 class="profile__name">Jacques Cousteau</h1>
+            <h1 class="profile__name" id="profile-name">Jacques Cousteau</h1>
             <button
               class="profile__edit-button"
               id="profile-edit-button"
               type="button"
             ></button>
-            <p class="profile__description">Explorer</p>
+            <p class="profile__description" id="profile-description">
+              Explorer
+            </p>
           </div>
           <button class="profile__add-button" type="button"></button>
         </section>
@@ -101,6 +103,15 @@
             </li>
           </ul>
         </section>
+        <template id="card-template">
+          <li class="card">
+            <img src="" alt="" class="card__image" />
+            <div class="card__description">
+              <h2 class="card__title"></h2>
+              <button class="card__button" type="button"></button>
+            </div>
+          </li>
+        </template>
       </main>
       <footer class="footer page__section">
         <h2 class="footer__text">© 2023 Brennan Duck</h2>
@@ -109,10 +120,20 @@
         <div class="modal__container">
           <button class="modal__close" id="profile-edit-close"></button>
           <p class="modal__heading">Edit Profile</p>
-          <form class="modal__form">
-            <input type="text" name="title" />
-            <input type="text" name="description" />
-            <button class="modal__button">Save</button>
+          <form class="modal__form" id="profile-edit-form">
+            <input
+              type="text"
+              name="title"
+              placeholder="Name"
+              id="profile-name-input"
+            />
+            <input
+              type="text"
+              name="description"
+              placeholder="Description"
+              id="profile-description-input"
+            />
+            <button class="modal__button" type="submit">Save</button>
           </form>
         </div>
       </div>
