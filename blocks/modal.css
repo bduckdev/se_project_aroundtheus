@@ -67,3 +67,27 @@
   padding: 15px;
   margin-top: 19px;
 }
+
+@media (max-width: 480px) {
+  .modal__container {
+    padding: 22px;
+  }
+  .modal__heading {
+    margin-bottom: 75px;
+    font-size: 18px;
+  }
+  .modal__form {
+    width: 238px;
+  }
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    left: auto;
+    right: 0px;
+    bottom: calc(100% + 15px);
+  }
+  .modal__button {
+    font-size: 14px;
+    margin-top: 13px;
+  }
+}
