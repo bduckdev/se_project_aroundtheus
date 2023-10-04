@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -43,18 +43,21 @@
       <footer class="footer page__section">
         <h2 class="footer__text">© 2023 Brennan Duck</h2>
       </footer>
+      <!-- PROFILE EDIT MODAL -->
       <div class="modal" id="profile-edit-modal">
         <div class="modal__container">
           <button class="modal__close" id="profile-edit-close"></button>
           <p class="modal__heading">Edit Profile</p>
           <form class="modal__form" name="profile-edit-form">
             <input
+              class="modal__input"
               type="text"
               name="title"
               placeholder="Name"
               id="profile-name-input"
             />
             <input
+              class="modal__input"
               type="text"
               name="description"
               placeholder="Description"
@@ -64,6 +67,31 @@
           </form>
         </div>
       </div>
+      <!-- ADD CARD MODAL -->
+      <div class="modal" id="add-card-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="add-card-close"></button>
+          <p class="modal__heading">New Place</p>
+          <form class="modal__form" name="add-card-form">
+            <input
+              class="modal__input"
+              type="text"
+              name="Image Link"
+              placeholder="Title"
+              id="add-card-title-input"
+            />
+            <input
+              class="modal__input"
+              type="text"
+              name="Image Link"
+              placeholder="Image Link"
+              id="add-card-image-link-input"
+            />
+            <button class="modal__button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
+      <!-- CARD TEMPLATE -->
       <template id="card-template">
         <li class="card">
           <img src="#" alt="" class="card__image" id="card-image" />
