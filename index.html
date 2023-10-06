@@ -85,19 +85,37 @@
               type="text"
               name="Image Link"
               placeholder="Image Link"
-              id="add-card-image-link-input"
+              id="add-card-image-input"
             />
             <button class="modal__button" type="submit">Save</button>
           </form>
         </div>
       </div>
+      <!-- VIEW IMAGE MODAL -->
+      <div class="modal" id="view-image-modal">
+        <div class="modal__image_container">
+          <button class="modal__close" id="view-image-close"></button>
+          <img
+            src="#"
+            alt=""
+            class="modal__image_image"
+            id="image-modal-image"
+          />
+          <p class="modal__image_text" id="image-modal-text"></p>
+        </div>
+      </div>
       <!-- CARD TEMPLATE -->
       <template id="card-template">
         <li class="card">
+          <button class="card__delete" id="card-delete"></button>
           <img src="#" alt="" class="card__image" id="card-image" />
           <div class="card__description">
             <h2 class="card__title" id="card-title"></h2>
-            <button class="card__button" type="button"></button>
+            <button
+              class="card__button"
+              type="button"
+              id="card-button"
+            ></button>
           </div>
         </li>
       </template>

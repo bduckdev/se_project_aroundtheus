@@ -32,7 +32,25 @@
   width: 21px;
   height: 18px;
 }
+.card__button_active {
+  background-image: url("../images/button-like-active.svg");
+}
 .card__button:hover {
   cursor: pointer;
   opacity: 0.5;
+  transition: 0.2s;
+}
+
+.card__delete {
+  position: relative;
+  top: 36px;
+  left: 249px;
+  background: transparent url("../images/button-remove.svg") center no-repeat;
+  border-style: none;
+  width: 18px;
+  height: 21px;
+}
+.card__delete:hover {
+  opacity: 0.6;
+  transition: 0.2s;
 }

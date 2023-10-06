@@ -68,6 +68,20 @@
   margin-top: 19px;
 }
 
+.modal__image_container {
+  position: relative;
+}
+
+.modal__image_image {
+  max-width: 75vw;
+  max-height: 75vh;
+}
+.modal__image_text {
+  font-size: 12px;
+  font-weight: 400px;
+  line-height: 15px;
+}
+
 @media (max-width: 480px) {
   .modal__container {
     padding: 22px;
