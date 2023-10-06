@@ -25,7 +25,7 @@
   left: calc(100% + 5px);
   width: 40px;
   height: 40px;
-  background-image: url(../images/button-close.svg);
+  background-image: url("../images/button-close.svg");
   border-style: none;
   background-color: transparent;
   background-size: contain;
@@ -68,15 +68,17 @@
   margin-top: 19px;
 }
 
-.modal__image_container {
-  position: relative;
+.modal__container_image {
+  border-radius: 0;
+  padding: 0;
+  background: rgba(0, 0, 0, 0);
 }
 
-.modal__image_image {
+.modal__image {
   max-width: 75vw;
   max-height: 75vh;
 }
-.modal__image_text {
+.modal__text {
   font-size: 12px;
   font-weight: 400px;
   line-height: 15px;
