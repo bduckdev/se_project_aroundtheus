@@ -76,11 +76,9 @@ function getCardElement(cardData) {
 
   cardImageEl.addEventListener("click", () => {
     imageModalImage.src = cardImageEl.src;
-    imageModalText.innerHTML = cardTitleEl.innerText;
+    imageModalImage.alt = cardImageEl.alt;
+    imageModalText.textContent = cardTitleEl.innerText;
     openModal(imageModal);
-  });
-  imageModalCloseButton.addEventListener("click", () => {
-    closeModal(imageModal);
   });
   cardTitleEl.innerText = cardData.name;
   cardImageEl.src = cardData.link;
@@ -106,6 +104,7 @@ function handleAddCardSubmit(e) {
   const link = addCardLink.value;
   const cardElement = getCardElement({ name, link });
   galleryListEl.prepend(cardElement);
+  e.target.reset();
   closeModal(addCardModal);
 }
 
@@ -127,6 +126,9 @@ profileAddButton.addEventListener("click", () => openModal(addCardModal));
 
 addCardCloseButton.addEventListener("click", () => {
   closeModal(addCardModal);
+});
+imageModalCloseButton.addEventListener("click", () => {
+  closeModal(imageModal);
 });
 addCardModal.addEventListener("submit", handleAddCardSubmit);
 initialCards.forEach((cardData) => {
