@@ -64,6 +64,24 @@
   line-height: 26px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
+.modal__input_type_error {
+  border-color: #ff0000;
+  border-bottom: 1px solid #ff0000;
+  text-align: left;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.modal__error {
+  color: #ff0000;
+  border-color: #ff0000;
+  opacity: 0;
+  text-align: left;
+  margin-top: 5px;
+  font-size: 12px;
+}
+.modal__error_visible {
+  opacity: 100%;
+}
 .modal__button {
   border-style: none;
   background-color: #000;
@@ -73,6 +91,10 @@
   line-height: 21.78px;
   padding: 15px;
   margin-top: 19px;
+}
+.modal__button_disabled {
+  opacity: 20%;
+  background-color: none;
 }
 
 .modal__container_image {

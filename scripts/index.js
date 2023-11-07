@@ -53,6 +53,8 @@ const imageModalText = document.querySelector("#image-modal-text");
 const imageModalImage = document.querySelector("#image-modal-image");
 const imageModalCloseButton = document.querySelector("#view-image-close");
 
+const modalContainer = document.querySelectorAll(".modal__container");
+
 /* FUNCTIONS */
 
 function closeModal(modal) {
@@ -134,4 +136,26 @@ addCardModal.addEventListener("submit", handleAddCardSubmit);
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   galleryListEl.append(cardElement);
+});
+
+addCardModal.addEventListener("click", () => {
+  closeModal(addCardModal);
+});
+imageModal.addEventListener("click", () => {
+  closeModal(imageModal);
+});
+profileEditModal.addEventListener("click", (e) => {
+  if (!e.target.closest.modalContainer) {
+    closeModal(profileEditModal);
+  }
+});
+addCardModal.addEventListener("click", (e) => {
+  if (!e.target.closest.modalContainer) {
+    closeModal(addCardModal);
+  }
+});
+imageModal.addEventListener("click", (e) => {
+  if (!e.target.closest.modalContainer) {
+    closeModal(imageModal);
+  }
 });

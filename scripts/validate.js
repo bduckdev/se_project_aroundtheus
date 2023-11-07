@@ -6,19 +6,21 @@ const config = {
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",
 };
+
 function showInputError(formEl, inputEl, options) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  console.log(errorMessageEl);
   inputEl.classList.add(options.inputErrorClass);
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(options.errorClass);
 }
+
 function hideInputError(formEl, inputEl, options) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.remove(options.inputErrorClass);
   errorMessageEl.textContent = "";
   errorMessageEl.classList.remove(options.errorClass);
 }
+
 function toggleButtonState(inputEls, submitButton, options) {
   let foundInvalid = false;
   inputEls.forEach((inputEl) => {
@@ -34,6 +36,7 @@ function toggleButtonState(inputEls, submitButton, options) {
     submitButton.disabled = false;
   }
 }
+
 function checkInputValidity(formEl, inputEl, options) {
   if (!inputEl.validity.valid) {
     showInputError(formEl, inputEl, options);
@@ -41,6 +44,7 @@ function checkInputValidity(formEl, inputEl, options) {
     hideInputError(formEl, inputEl, options);
   }
 }
+
 function setEventListeners(formEl, options) {
   const inputSelector = options.inputSelector;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
@@ -53,12 +57,14 @@ function setEventListeners(formEl, options) {
     });
   });
 }
+
 function enableValidation(options) {
   const formEls = [...document.querySelectorAll(options.formSelector)];
   formEls.forEach((formEl) => {
     formEl.addEventListener("submit", (e) => {
       e.preventDefault();
     });
+    setEventListeners(formEl, config);
   });
 }
 
