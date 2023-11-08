@@ -124,38 +124,52 @@ profileEditCloseButton.addEventListener("click", () => {
 
 profileEditModal.addEventListener("submit", handleProfileEditSubmit);
 
+profileEditModal.addEventListener("click", (e) => {
+  if (e.target === profileEditModal) {
+    closeModal(profileEditModal);
+  }
+});
+
+profileEditModal.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal(profileEditModal);
+  }
+});
 profileAddButton.addEventListener("click", () => openModal(addCardModal));
 
 addCardCloseButton.addEventListener("click", () => {
   closeModal(addCardModal);
 });
+
+imageModal.addEventListener("click", (e) => {
+  if (e.target === imageModal) {
+    closeModal(imageModal);
+  }
+});
+imageModal.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal(imageModal);
+  }
+});
 imageModalCloseButton.addEventListener("click", () => {
   closeModal(imageModal);
 });
-addCardModal.addEventListener("submit", handleAddCardSubmit);
-initialCards.forEach((cardData) => {
-  const cardElement = getCardElement(cardData);
-  galleryListEl.append(cardElement);
-});
 
-addCardModal.addEventListener("click", () => {
-  closeModal(addCardModal);
-});
-imageModal.addEventListener("click", () => {
-  closeModal(imageModal);
-});
-profileEditModal.addEventListener("click", (e) => {
-  if (!e.target.closest.modalContainer) {
-    closeModal(profileEditModal);
-  }
-});
 addCardModal.addEventListener("click", (e) => {
-  if (!e.target.closest.modalContainer) {
+  if (e.target === addCardModal) {
     closeModal(addCardModal);
   }
 });
-imageModal.addEventListener("click", (e) => {
-  if (!e.target.closest.modalContainer) {
-    closeModal(imageModal);
+
+addCardModal.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    closeModal(addCardModal);
   }
+});
+
+addCardModal.addEventListener("submit", handleAddCardSubmit);
+
+initialCards.forEach((cardData) => {
+  const cardElement = getCardElement(cardData);
+  galleryListEl.append(cardElement);
 });
