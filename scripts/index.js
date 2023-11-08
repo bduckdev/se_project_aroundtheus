@@ -130,11 +130,6 @@ profileEditModal.addEventListener("click", (e) => {
   }
 });
 
-profileEditModal.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeModal(profileEditModal);
-  }
-});
 profileAddButton.addEventListener("click", () => openModal(addCardModal));
 
 addCardCloseButton.addEventListener("click", () => {
@@ -143,11 +138,6 @@ addCardCloseButton.addEventListener("click", () => {
 
 imageModal.addEventListener("click", (e) => {
   if (e.target === imageModal) {
-    closeModal(imageModal);
-  }
-});
-imageModal.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
     closeModal(imageModal);
   }
 });
@@ -161,9 +151,11 @@ addCardModal.addEventListener("click", (e) => {
   }
 });
 
-addCardModal.addEventListener("keydown", (e) => {
+document.addEventListener("keydown", (e) => {
   if (e.key === "Escape") {
+    closeModal(profileEditModal);
     closeModal(addCardModal);
+    closeModal(imageModal);
   }
 });
 
