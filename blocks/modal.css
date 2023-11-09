@@ -57,7 +57,7 @@
   width: 358px;
   gap: 29px;
 }
-.modal__form input {
+.modal__input {
   border: none;
   font-weight: 400;
   font-size: 14px;
@@ -65,8 +65,7 @@
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 }
 .modal__input_type_error {
-  border-color: #ff0000;
-  border-bottom: 1px solid #ff0000;
+  border-bottom-color: #ff0000;
   text-align: left;
   margin-top: 5px;
   font-size: 12px;
