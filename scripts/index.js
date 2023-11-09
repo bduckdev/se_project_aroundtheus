@@ -53,7 +53,8 @@ const imageModalText = document.querySelector("#image-modal-text");
 const imageModalImage = document.querySelector("#image-modal-image");
 const imageModalCloseButton = document.querySelector("#view-image-close");
 
-const modalContainer = document.querySelectorAll(".modal__container");
+const modalContainers = document.querySelectorAll(".modal__container");
+const modals = document.querySelectorAll(".modal");
 
 /* FUNCTIONS */
 
@@ -90,6 +91,22 @@ function getCardElement(cardData) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal(modal);
+    }
+  });
+  modals.forEach((modal) => {
+    modal.addEventListener("mousedown", (e) => {
+      if (e.target.classList.contains("modal_opened")) {
+        closeModal(modal);
+      }
+      if (e.target.classList.contains("modal__close")) {
+        closeModal(modal);
+      }
+    });
+  });
 }
 /* event handlers */
 
@@ -118,46 +135,9 @@ profileEditButton.addEventListener("click", () => {
   profileDescriptionInput.value = profileDescription.innerText;
 });
 
-profileEditCloseButton.addEventListener("click", () => {
-  closeModal(profileEditModal);
-});
-
 profileEditModal.addEventListener("submit", handleProfileEditSubmit);
 
-profileEditModal.addEventListener("click", (e) => {
-  if (e.target === profileEditModal) {
-    closeModal(profileEditModal);
-  }
-});
-
 profileAddButton.addEventListener("click", () => openModal(addCardModal));
-
-addCardCloseButton.addEventListener("click", () => {
-  closeModal(addCardModal);
-});
-
-imageModal.addEventListener("click", (e) => {
-  if (e.target === imageModal) {
-    closeModal(imageModal);
-  }
-});
-imageModalCloseButton.addEventListener("click", () => {
-  closeModal(imageModal);
-});
-
-addCardModal.addEventListener("click", (e) => {
-  if (e.target === addCardModal) {
-    closeModal(addCardModal);
-  }
-});
-
-document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
-    closeModal(profileEditModal);
-    closeModal(addCardModal);
-    closeModal(imageModal);
-  }
-});
 
 addCardModal.addEventListener("submit", handleAddCardSubmit);
 
