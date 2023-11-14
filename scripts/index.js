@@ -34,7 +34,7 @@ const profileName = document.querySelector("#profile-name");
 const profileDescription = document.querySelector("#profile-description");
 const profileNameInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input",
+  "#profile-description-input"
 );
 const profileForm = document.forms["profile-edit-form"];
 const galleryListEl = document.querySelector("#gallery-container");
@@ -86,12 +86,13 @@ function getCardElement(cardData) {
 }
 
 function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", (e) => {
+  function closeOnEscape(e) {
     if (e.key === "Escape") {
       closeModal(modal);
     }
-  });
+  }
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", closeOnEscape(e));
 }
 
 function openModal(modal) {
