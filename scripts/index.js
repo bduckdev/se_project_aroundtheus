@@ -58,10 +58,6 @@ const modals = document.querySelectorAll(".modal");
 
 /* FUNCTIONS */
 
-function closeModal(modal) {
-  modal.classList.remove("modal_opened");
-}
-
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEl = cardElement.querySelector("#card-image");
@@ -89,6 +85,15 @@ function getCardElement(cardData) {
   return cardElement;
 }
 
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      closeModal(modal);
+    }
+  });
+}
+
 function openModal(modal) {
   modal.classList.add("modal_opened");
 
@@ -96,16 +101,6 @@ function openModal(modal) {
     if (e.key === "Escape") {
       closeModal(modal);
     }
-  });
-  modals.forEach((modal) => {
-    modal.addEventListener("mousedown", (e) => {
-      if (e.target.classList.contains("modal_opened")) {
-        closeModal(modal);
-      }
-      if (e.target.classList.contains("modal__close")) {
-        closeModal(modal);
-      }
-    });
   });
 }
 /* event handlers */
@@ -144,4 +139,15 @@ addCardModal.addEventListener("submit", handleAddCardSubmit);
 initialCards.forEach((cardData) => {
   const cardElement = getCardElement(cardData);
   galleryListEl.append(cardElement);
+});
+
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", (e) => {
+    if (e.target.classList.contains("modal_opened")) {
+      closeModal(modal);
+    }
+    if (e.target.classList.contains("modal__close")) {
+      closeModal(modal);
+    }
+  });
 });
