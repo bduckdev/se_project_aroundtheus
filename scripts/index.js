@@ -34,7 +34,7 @@ const profileName = document.querySelector("#profile-name");
 const profileDescription = document.querySelector("#profile-description");
 const profileNameInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
+  "#profile-description-input",
 );
 const profileForm = document.forms["profile-edit-form"];
 const galleryListEl = document.querySelector("#gallery-container");
@@ -86,23 +86,14 @@ function getCardElement(cardData) {
 }
 
 function closeModal(modal) {
-  function closeOnEscape(e) {
-    if (e.key === "Escape") {
-      closeModal(modal);
-    }
-  }
   modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", closeOnEscape(e));
+  document.removeEventListener("keydown", handleEscapeKey);
+  document.removeEventListener("click", handleModalCloseClick);
 }
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-
-  document.addEventListener("keydown", (e) => {
-    if (e.key === "Escape") {
-      closeModal(modal);
-    }
-  });
+  document.addEventListener("keydown", (e) => handleEscapeKey(e, modal));
 }
 /* event handlers */
 
@@ -123,6 +114,19 @@ function handleAddCardSubmit(e) {
   closeModal(addCardModal);
 }
 
+function handleEscapeKey(e, modal) {
+  if (e.key === "Escape") {
+    closeModal(modal);
+  }
+}
+function handleModalCloseClick(e, modal) {
+  if (e.target.classList.contains("modal_opened")) {
+    closeModal(modal);
+  }
+  if (e.target.classList.contains("modal__close")) {
+    closeModal(modal);
+  }
+}
 /* event listeners */
 
 profileEditButton.addEventListener("click", () => {
@@ -143,12 +147,5 @@ initialCards.forEach((cardData) => {
 });
 
 modals.forEach((modal) => {
-  modal.addEventListener("mousedown", (e) => {
-    if (e.target.classList.contains("modal_opened")) {
-      closeModal(modal);
-    }
-    if (e.target.classList.contains("modal__close")) {
-      closeModal(modal);
-    }
-  });
+  modal.addEventListener("mousedown", (e) => handleModalCloseClick(e, modal));
 });
