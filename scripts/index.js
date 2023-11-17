@@ -92,7 +92,7 @@ function closeModal(modal) {
 
 function openModal(modal) {
   modal.classList.add("modal_opened");
-  document.addEventListener("keydown", (e) => handleEscapeKey(e));
+  document.addEventListener("keydown", handleEscapeKey);
 }
 /* event handlers */
 
