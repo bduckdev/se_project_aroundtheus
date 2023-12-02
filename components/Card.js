@@ -23,22 +23,6 @@ export default class Card {
     this._cardEl.remove();
     this._cardEl = null;
   }
-  getViewInitial() {
-    this._cardEl = document
-      .querySelector(this._cardSelector)
-      .content.cloneNode(true)
-      .querySelector(".card");
-
-    this.cardImageEl = this._cardEl.querySelector("#card-image");
-    this.cardTitleEl = this._cardEl.querySelector("#card-title");
-    this._likeButton = this._cardEl.querySelector("#card-button");
-    this._deleteButton = this._cardEl.querySelector("#card-delete");
-    this.cardTitleEl.innerText = this._name;
-    this.cardImageEl.src = this._link;
-    this.cardImageEl.alt = this._name;
-    document.querySelector(".gallery__container").append(this._cardEl);
-    this._setEventListeners();
-  }
   getView() {
     this._cardEl = document
       .querySelector(this._cardSelector)
@@ -52,7 +36,7 @@ export default class Card {
     this.cardTitleEl.innerText = this._name;
     this.cardImageEl.src = this._link;
     this.cardImageEl.alt = this._name;
-    document.querySelector(".gallery__container").prepend(this._cardEl);
     this._setEventListeners();
+    return this._cardEl;
   }
 }

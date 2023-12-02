@@ -36,7 +36,7 @@ const profileName = document.querySelector("#profile-name");
 const profileDescription = document.querySelector("#profile-description");
 const profileNameInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input",
+  "#profile-description-input"
 );
 
 const profileAddButton = document.querySelector(".profile__add-button");
@@ -51,6 +51,8 @@ const imageModalImage = document.querySelector("#image-modal-image");
 const modals = document.querySelectorAll(".modal");
 
 const formEls = [...document.querySelectorAll("form")];
+
+const galleryContainer = document.querySelector(".gallery__container");
 
 // FUNCTIONS
 
@@ -75,12 +77,8 @@ function handleAddCardSubmit(e) {
   e.preventDefault();
   const name = addCardName.value;
   const link = addCardLink.value;
-  const cardElement = new Card(
-    { name, link },
-    "#card-template",
-    handleImageClick,
-  );
-  cardElement.getView();
+  const cardEl = createCard({ name, link });
+  galleryContainer.prepend(cardEl);
   e.target.reset();
   closeModal(addCardModal);
   addCardValidator.disableSubmitButton();
@@ -106,6 +104,10 @@ function handleImageClick(card) {
   imageModalText.textContent = card.cardTitleEl.innerText;
   openModal(imageModal);
 }
+function createCard({ name, link }) {
+  const cardEl = new Card({ name, link }, "#card-template", handleImageClick);
+  return cardEl.getView();
+}
 // event listeners
 
 profileEditButton.addEventListener("click", () => {
@@ -124,11 +126,6 @@ modals.forEach((modal) => {
   modal.addEventListener("mousedown", (e) => handleModalCloseClick(e, modal));
 });
 
-initialCards.forEach((cardData) => {
-  const cardEl = new Card(cardData, "#card-template", handleImageClick);
-  cardEl.getViewInitial();
-});
-
 // validation
 
 const validatorConfig = {
@@ -145,7 +142,13 @@ addCardValidator.enableValidation();
 
 const profileEditValidator = new FormValidator(
   validatorConfig,
-  profileEditModal,
+  profileEditModal
 );
 addCardValidator.enableValidation();
 profileEditValidator.enableValidation();
+
+// on page load
+initialCards.forEach(({ name, link }) => {
+  const cardEl = createCard({ name, link });
+  galleryContainer.append(cardEl);
+});
