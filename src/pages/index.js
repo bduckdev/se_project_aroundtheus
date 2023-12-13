@@ -1,5 +1,6 @@
 import Card from "../components/Card.js";
 import FormValidator from "../components/FormValidator.js";
+import "../pages/index.css";
 
 const initialCards = [
   {
@@ -36,7 +37,7 @@ const profileName = document.querySelector("#profile-name");
 const profileDescription = document.querySelector("#profile-description");
 const profileNameInput = document.querySelector("#profile-name-input");
 const profileDescriptionInput = document.querySelector(
-  "#profile-description-input"
+  "#profile-description-input",
 );
 
 const profileAddButton = document.querySelector(".profile__add-button");
@@ -142,7 +143,7 @@ addCardValidator.enableValidation();
 
 const profileEditValidator = new FormValidator(
   validatorConfig,
-  profileEditModal
+  profileEditModal,
 );
 addCardValidator.enableValidation();
 profileEditValidator.enableValidation();
