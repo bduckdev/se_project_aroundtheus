@@ -5,7 +5,7 @@ export default class FormValidator {
   }
   _showInputError(inputEl) {
     const errorMessageEl = this._targetForm.querySelector(
-      `#${inputEl.id}-error`
+      `#${inputEl.id}-error`,
     );
     inputEl.classList.add(this._config.inputErrorClass);
     errorMessageEl.textContent = inputEl.validationMessage;
@@ -14,7 +14,7 @@ export default class FormValidator {
 
   _hideInputError(inputEl) {
     const errorMessageEl = this._targetForm.querySelector(
-      `#${inputEl.id}-error`
+      `#${inputEl.id}-error`,
     );
     inputEl.classList.remove(this._config.inputErrorClass);
     errorMessageEl.textContent = "";
@@ -46,7 +46,7 @@ export default class FormValidator {
     const inputSelector = this._config.inputSelector;
     const inputEls = [...this._targetForm.querySelectorAll(inputSelector)];
     const submitButton = this._targetForm.querySelector(
-      this._config.submitButtonSelector
+      this._config.submitButtonSelector,
     );
     this._toggleButtonState(inputEls, submitButton);
 
@@ -58,15 +58,14 @@ export default class FormValidator {
     });
   }
   enableValidation() {
-    const formEl = this._targetForm;
-    formEl.addEventListener("submit", (e) => {
+    this._targetForm.addEventListener("submit", (e) => {
       e.preventDefault();
     });
-    this._setEventListeners(formEl);
+    this._setEventListeners(this._targetForm);
   }
   disableSubmitButton() {
     const submitButton = this._targetForm.querySelector(
-      this._config.submitButtonSelector
+      this._config.submitButtonSelector,
     );
     submitButton.classList.add(this._config.inactiveButtonClass);
     submitButton.disabled = true;
