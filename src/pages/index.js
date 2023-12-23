@@ -5,7 +5,7 @@ import "../pages/index.css";
 import ModalWithForm from "../components/ModalWithForm.js";
 import ModalWithImage from "../components/ModalWithImage.js";
 import UserInfo from "../components/UserInfo.js";
-
+import Section from "../components/Section.js";
 // modals
 const profileEditModal = new ModalWithForm({
   modalSelector: "#profile-edit-modal",
@@ -85,13 +85,16 @@ addCardValidator.enableValidation();
 profileEditValidator.enableValidation();
 
 // on page load
-consts.initialCards.forEach(({ name, link }) => {
-  const cardEl = createCard({ name, link });
-  consts.galleryContainer.append(cardEl);
-});
 
 addCardModal.setEventListeners();
 
 profileEditModal.setEventListeners();
 
 imageModal.setEventListeners();
+
+const test = new Section(
+  { items: consts.initialCards, renderer: createCard },
+  "#gallery-container",
+);
+
+test.renderItems();

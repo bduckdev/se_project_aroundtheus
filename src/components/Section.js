@@ -9,14 +9,18 @@ and call the renderer() function on each item.
     */
 
 export default class Section {
-  constructor(items, renderer) {
+  constructor({ items, renderer }, selector) {
     this.items = items;
     this.renderer = renderer;
+    this.selector = selector;
   }
-  addItems() {
-    //add items
+  addItem(el) {
+    document.querySelector(this.selector).appendChild(el);
   }
   renderItems() {
-    // renderItems
+    this.items.forEach((item) => {
+      const el = this.renderer(item);
+      this.addItem(el);
+    });
   }
 }
