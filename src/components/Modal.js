@@ -10,6 +10,7 @@ export default class Modal {
   }
   close() {
     this._modalElement.classList.remove("modal_opened");
+    document.removeEventListener("keydown", this._handleEscClose);
   }
   _handleCloseClick(e) {
     if (e.target.classList.contains("modal_opened")) {
@@ -21,7 +22,6 @@ export default class Modal {
   }
   _handleEscClose(e) {
     if (e.key === "Escape") {
-      document.removeEventListener("keydown", this._handleEscClose);
       this.close();
     }
   }
