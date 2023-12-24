@@ -30,17 +30,17 @@ const profileEl = new UserInfo({
 
 // submission handlers
 
-function handleProfileEditSubmit(e, inputs) {
+function handleProfileEditSubmit(e, inputValues) {
   e.preventDefault();
-  const name = inputs["Name"];
-  const description = inputs["Description"];
+  const name = inputValues["Name"];
+  const description = inputValues["Description"];
   profileEl.setUserInfo(name, description);
   profileEditValidator.disableSubmitButton();
 }
-function handleAddCardSubmit(e, inputs) {
+function handleAddCardSubmit(e, inputValues) {
   e.preventDefault();
-  const name = inputs["Title"];
-  const link = inputs["Image Link"];
+  const name = inputValues["Title"];
+  const link = inputValues["Image Link"];
   const cardEl = createCard({ name, link });
   gallery.addItem(cardEl);
   addCardValidator.disableSubmitButton();

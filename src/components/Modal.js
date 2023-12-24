@@ -4,6 +4,9 @@ export default class Modal {
   }
   open() {
     this._modalElement.classList.add("modal_opened");
+    document.addEventListener("keydown", (e) => {
+      this._handleEscClose(e);
+    });
   }
   close() {
     this._modalElement.classList.remove("modal_opened");
@@ -25,9 +28,6 @@ export default class Modal {
   setEventListeners() {
     this._modalElement.addEventListener("click", (e) => {
       this._handleCloseClick(e);
-    });
-    document.addEventListener("keydown", (e) => {
-      this._handleEscClose(e);
     });
   }
 }
