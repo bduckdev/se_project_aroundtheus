@@ -24,20 +24,17 @@ const imageModal = new ModalWithImage({
 // profile section
 
 const profileEl = new UserInfo({
-  name: "Jacques Cousteau",
-  description: "Explorer",
+  nameSelector: "#profile-name",
+  descriptionSelector: "#profile-description",
 });
 
-profileEl.getUserInfo();
-profileEl.setUserInfo();
 // submission handlers
 
 function handleProfileEditSubmit(e, inputs) {
+  e.preventDefault();
   const name = inputs["Name"];
   const description = inputs["Description"];
-  e.preventDefault();
-  consts.profileName.innerText = name;
-  consts.profileDescription.innerText = description;
+  profileEl.setUserInfo(name, description);
   profileEditValidator.disableSubmitButton();
 }
 function handleAddCardSubmit(e, inputs) {
@@ -45,8 +42,7 @@ function handleAddCardSubmit(e, inputs) {
   const name = inputs["Title"];
   const link = inputs["Image Link"];
   const cardEl = createCard({ name, link });
-  consts.galleryContainer.prepend(cardEl);
-  e.target.reset();
+  gallery.addItem(cardEl);
   addCardValidator.disableSubmitButton();
 }
 // random handlers
@@ -61,8 +57,9 @@ function createCard({ name, link }) {
 
 consts.profileEditButton.addEventListener("click", () => {
   profileEditModal.open();
-  consts.profileNameInput.value = consts.profileName.innerText;
-  consts.profileDescriptionInput.value = consts.profileDescription.innerText;
+  const profileData = profileEl.getUserInfo();
+  consts.profileNameInput.value = profileData["name"];
+  consts.profileDescriptionInput.value = profileData["description"];
 });
 
 consts.profileAddButton.addEventListener("click", () => {
@@ -92,9 +89,9 @@ profileEditModal.setEventListeners();
 
 imageModal.setEventListeners();
 
-const test = new Section(
+const gallery = new Section(
   { items: consts.initialCards, renderer: createCard },
   "#gallery-container",
 );
 
-test.renderItems();
+gallery.renderItems();
