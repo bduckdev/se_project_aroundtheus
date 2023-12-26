@@ -1,4 +1,3 @@
-import * as consts from "../utils/constants.js";
 import Modal from "./Modal.js";
 
 export default class ModalWithImage extends Modal {
@@ -6,11 +5,12 @@ export default class ModalWithImage extends Modal {
     super({ modalSelector });
   }
   open(card) {
-    consts.imageModalImage.src = card.cardImageEl.src;
+    document.querySelector("#image-modal-image").src = card.cardImageEl.src;
 
-    consts.imageModalImage.alt = card.cardImageEl.alt;
+    document.querySelector("#image-modal-image").alt = card.cardImageEl.alt;
 
-    consts.imageModalText.textContent = card.cardTitleEl.textContent;
+    document.querySelector("#image-modal-text").textContent =
+      card.cardTitleEl.textContent;
 
     super.open();
   }
