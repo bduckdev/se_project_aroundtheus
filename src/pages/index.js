@@ -72,13 +72,14 @@ const addCardValidator = new FormValidator(
   consts.validatorConfig,
   consts.addCardModalDiv,
 );
+
 addCardValidator.enableValidation();
 
 const profileEditValidator = new FormValidator(
   consts.validatorConfig,
   consts.profileEditDiv,
 );
-addCardValidator.enableValidation();
+
 profileEditValidator.enableValidation();
 
 // on page load
