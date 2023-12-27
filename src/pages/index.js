@@ -21,7 +21,6 @@ const imageModal = new ModalWithImage({
   modalSelector: "#view-image-modal",
 });
 
-profileEditModal.open();
 // profile section
 
 const profileEl = new UserInfo({
