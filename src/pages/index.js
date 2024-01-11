@@ -142,6 +142,11 @@ function handleLikeButton(card) {
 function handleImageClick(card) {
   imageModal.open(card);
 }
+function handleInitialLoad(data) {
+  const userData = data[0];
+
+  const cards = data[1];
+}
 function createCard({ name, link, _id, isLiked }) {
   const cardEl = new Card(
     { name, link, _id, isLiked },
@@ -168,6 +173,19 @@ consts.avatar.addEventListener("click", () => {
   avatarEditModal.open();
 });
 
+// initial loading handlers
+
+function handleInitialCards(cardData) {
+  cardData.forEach((card) => {
+    const cardEl = createCard(card);
+    gallery.addItem(cardEl);
+  });
+}
+
+function handleProfileLoad({ name, about, avatar }) {
+  profileEl.setUserInfo(name, about);
+  profileEl.setAvatar(avatar);
+}
 // validation
 
 const addCardValidator = new FormValidator(
@@ -196,14 +214,12 @@ const gallery = new Section(
   "#gallery-container",
 );
 
-api.getInitialCards().then((cardData) => {
-  cardData.forEach((card) => {
-    console.log(card);
-    const cardEl = createCard(card);
-    gallery.addItem(cardEl);
+api
+  .initialLoad()
+  .then((data) => {
+    handleProfileLoad(data[0]);
+    return data;
+  })
+  .then((data) => {
+    handleInitialCards(data[1]);
   });
-});
-
-api.getUserData().then(({ name, about }) => {
-  profileEl.setUserInfo(name, about);
-});
