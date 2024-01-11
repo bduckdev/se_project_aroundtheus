@@ -32,6 +32,8 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
   updateAvatar(img) {
@@ -48,6 +50,8 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
   getInitialCards() {
@@ -77,6 +81,8 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
   deleteCard(cardId) {
@@ -93,6 +99,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
   likeCard(cardId) {
@@ -109,6 +116,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
   unlikeCard(cardId) {
@@ -125,6 +133,7 @@ export default class Api {
       if (res.ok) {
         return res.json();
       }
+      return Promise.reject(`Error: ${res.status}`);
     });
   }
 }

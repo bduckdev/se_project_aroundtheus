@@ -11,9 +11,7 @@ export default class ModalDelete extends Modal {
     super.open();
   }
   _setEventListeners(card) {
-    console.log(card);
     this._deleteButton.addEventListener("click", () => {
-      console.log("oops");
       this._handleCardRemoval(card);
       this.close();
     });

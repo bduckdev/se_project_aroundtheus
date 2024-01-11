@@ -22,6 +22,7 @@
             src="<%= require('./images/avatar.jpg')%>"
             alt="Avatar"
             class="profile__avatar"
+            id="avatar"
           />
           <div class="profile__info">
             <h1 class="profile__name" id="profile-name">Jacques Cousteau</h1>
@@ -111,11 +112,32 @@
           </form>
         </div>
       </div>
+      <!-- EDIT PROFILE IMAGE MODAL -->
+      <div class="modal" id="avatar-edit-modal">
+        <div class="modal__container">
+          <button class="modal__close" id="add-card-close"></button>
+          <p class="modal__heading">Change profile picture</p>
+          <form class="modal__form" name="avatar-form">
+            <input
+              class="modal__input"
+              type="url"
+              name="Avatar"
+              placeholder="Image Link"
+              id="avatar-url"
+              minlength="1"
+              maxlength="100"
+              required
+            />
+            <span class="modal__error" id="avatar-input-error"></span>
+            <button class="modal__button" type="submit">Save</button>
+          </form>
+        </div>
+      </div>
       <!-- DELETE IMAGE MODAL -->
       <div class="modal" id="delete-image-modal">
         <div class="modal__container">
           <button class="modal__close" id="delete-image-close"></button>
-          <p class="modal__heading">Are you sure?</p>
+          <p class="modal__heading modal__heading-delete">Are you sure?</p>
           <button class="modal__button" id="delete-image-confirm">Yes</button>
         </div>
       </div>

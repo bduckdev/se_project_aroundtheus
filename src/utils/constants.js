@@ -61,3 +61,5 @@ export const modals = document.querySelectorAll(".modal");
 export const formEls = [...document.querySelectorAll("form")];
 
 export const galleryContainer = document.querySelector(".gallery__container");
+
+export const avatar = document.querySelector("#avatar");
