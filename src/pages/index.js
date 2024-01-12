@@ -89,11 +89,12 @@ function handleAddCardSubmit(e, inputValues) {
   const link = inputValues["Image Link"];
   return api
     .addCard({ name, link })
-    .then(() => {
+    .then((card) => {
       document.querySelector(".modal__button").innerText = "Saving...";
+      return card;
     })
-    .then(() => {
-      const cardEl = createCard({ name, link });
+    .then((card) => {
+      const cardEl = createCard(card);
       gallery.addItem(cardEl);
       addCardValidator.disableSubmitButton();
     })
@@ -142,11 +143,6 @@ function handleLikeButton(card) {
 function handleImageClick(card) {
   imageModal.open(card);
 }
-function handleInitialLoad(data) {
-  const userData = data[0];
-
-  const cards = data[1];
-}
 function createCard({ name, link, _id, isLiked }) {
   const cardEl = new Card(
     { name, link, _id, isLiked },
@@ -187,21 +183,15 @@ function handleProfileLoad({ name, about, avatar }) {
   profileEl.setAvatar(avatar);
 }
 // validation
+const formValidation = [
+  new FormValidator(consts.validatorConfig, consts.addCardModalDiv),
+  new FormValidator(consts.validatorConfig, consts.profileEditDiv),
+  new FormValidator(consts.validatorConfig, consts.avatarEditDiv),
+];
 
-const addCardValidator = new FormValidator(
-  consts.validatorConfig,
-  consts.addCardModalDiv,
-);
-
-addCardValidator.enableValidation();
-
-const profileEditValidator = new FormValidator(
-  consts.validatorConfig,
-  consts.profileEditDiv,
-);
-
-profileEditValidator.enableValidation();
-
+formValidation.forEach((form) => {
+  form.enableValidation();
+});
 // on page load
 
 addCardModal.setEventListeners();
