@@ -62,7 +62,7 @@ function handleProfileEditSubmit(e, inputValues) {
     })
     .then(() => {
       profileEl.setUserInfo(name, description);
-      profileEditValidator.disableSubmitButton();
+      formValidation[1].disableSubmitButton();
     })
     .catch((err) => {
       console.error(err);
@@ -96,7 +96,7 @@ function handleAddCardSubmit(e, inputValues) {
     .then((card) => {
       const cardEl = createCard(card);
       gallery.addItem(cardEl);
-      addCardValidator.disableSubmitButton();
+      formValidation[0].disableSubmitButton();
     })
     .catch((err) => {
       console.error(err);
@@ -171,13 +171,6 @@ consts.avatar.addEventListener("click", () => {
 
 // initial loading handlers
 
-function handleInitialCards(cardData) {
-  cardData.forEach((card) => {
-    const cardEl = createCard(card);
-    gallery.addItem(cardEl);
-  });
-}
-
 function handleProfileLoad({ name, about, avatar }) {
   profileEl.setUserInfo(name, about);
   profileEl.setAvatar(avatar);
@@ -211,5 +204,6 @@ api
     return data;
   })
   .then((data) => {
-    handleInitialCards(data[1]);
+    gallery["items"] = data[1];
+    gallery.renderItems();
   });
