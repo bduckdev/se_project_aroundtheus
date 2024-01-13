@@ -1,9 +1,7 @@
 export default class Api {
-  constructor({ baseUrl, headers: { authorization } }) {
+  constructor({ baseUrl, headers }) {
     this.baseUrl = baseUrl;
-    this.headers = {
-      authorization,
-    };
+    this.headers = headers;
   }
   _checkResponse(res) {
     if (res.ok) {
@@ -23,10 +21,7 @@ export default class Api {
   updateProfileInfo(name, description) {
     return fetch(`${this.baseUrl}/users/me`, {
       method: "PATCH",
-      headers: {
-        authorization: this.headers.authorization,
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         name: name,
         about: description,
@@ -38,10 +33,7 @@ export default class Api {
   updateAvatar(img) {
     return fetch(`${this.baseUrl}/users/me/avatar`, {
       method: "PATCH",
-      headers: {
-        authorization: this.headers.authorization,
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         avatar: img,
       }),
@@ -51,9 +43,7 @@ export default class Api {
   }
   getInitialCards() {
     return fetch(`${this.baseUrl}/cards`, {
-      headers: {
-        authorization: this.headers.authorization,
-      },
+      headers: this.headers,
     }).then((res) => {
       return this._checkResponse(res);
     });
@@ -61,10 +51,7 @@ export default class Api {
   addCard({ name, link }) {
     return fetch(`${this.baseUrl}/cards`, {
       method: "POST",
-      headers: {
-        authorization: this.headers.authorization,
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         name: name,
         link: link,
@@ -76,10 +63,7 @@ export default class Api {
   deleteCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}`, {
       method: "DELETE",
-      headers: {
-        authorization: this.headers.authorization,
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         _id: cardId,
       }),
@@ -90,10 +74,7 @@ export default class Api {
   likeCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "PUT",
-      headers: {
-        authorization: this.headers.authorization,
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         _id: cardId,
       }),
@@ -104,10 +85,7 @@ export default class Api {
   unlikeCard(cardId) {
     return fetch(`${this.baseUrl}/cards/${cardId}/likes`, {
       method: "DELETE",
-      headers: {
-        authorization: this.headers.authorization,
-        "Content-Type": "application/json",
-      },
+      headers: this.headers,
       body: JSON.stringify({
         _id: cardId,
       }),
