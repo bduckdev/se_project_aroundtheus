@@ -38,7 +38,8 @@ const imageModal = new ModalWithImage({
 
 const deleteModal = new ModalDelete({
   modalSelector: "#delete-image-modal",
-  handleCardRemoval: handleCardRemoval,
+  cardRemovalHandler: handleCardRemoval,
+  card: undefined,
 });
 
 // profile section
@@ -104,7 +105,8 @@ function handleAddCardSubmit(e, inputValues) {
 }
 // random handlers
 function handleDeleteButton(card) {
-  deleteModal.open(card);
+  deleteModal["card"] = card;
+  deleteModal.open();
 }
 function handleCardRemoval(card) {
   return api
@@ -207,3 +209,16 @@ api
     gallery["items"] = data[1];
     gallery.renderItems();
   });
+function loadDefaultCards() {
+  api.getInitialCards().then((data) => {
+    if (data.length != 0) {
+      return;
+    } else {
+      console.log("Loading Default Cards");
+      consts.initialCards.forEach((card) => {
+        api.addCard(card);
+      });
+    }
+  });
+}
+loadDefaultCards();

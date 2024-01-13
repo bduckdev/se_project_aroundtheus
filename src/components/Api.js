@@ -5,16 +5,19 @@ export default class Api {
       authorization,
     };
   }
+  _checkResponse(res) {
+    if (res.ok) {
+      return res.json();
+    }
+    return Promise.reject(`Error: ${res.status}`);
+  }
   getUserData() {
     return fetch(`${this.baseUrl}/users/me`, {
       headers: {
         authorization: this.headers.authorization,
       },
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   updateProfileInfo(name, description) {
@@ -29,11 +32,7 @@ export default class Api {
         about: description,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   updateAvatar(img) {
@@ -47,11 +46,7 @@ export default class Api {
         avatar: img,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   getInitialCards() {
@@ -60,10 +55,7 @@ export default class Api {
         authorization: this.headers.authorization,
       },
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   addCard({ name, link }) {
@@ -78,11 +70,7 @@ export default class Api {
         link: link,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   deleteCard(cardId) {
@@ -96,10 +84,7 @@ export default class Api {
         _id: cardId,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   likeCard(cardId) {
@@ -113,10 +98,7 @@ export default class Api {
         _id: cardId,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   unlikeCard(cardId) {
@@ -130,10 +112,7 @@ export default class Api {
         _id: cardId,
       }),
     }).then((res) => {
-      if (res.ok) {
-        return res.json();
-      }
-      return Promise.reject(`Error: ${res.status}`);
+      return this._checkResponse(res);
     });
   }
   initialLoad() {
