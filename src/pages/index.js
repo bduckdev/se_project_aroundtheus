@@ -166,7 +166,7 @@ consts.profileEditButton.addEventListener("click", () => {
 consts.profileAddButton.addEventListener("click", () => {
   addCardModal.open();
 });
-consts.avatar.addEventListener("click", () => {
+consts.avatarContainer.addEventListener("click", () => {
   avatarEditModal.open();
 });
 

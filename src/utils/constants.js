@@ -62,6 +62,7 @@ export const formEls = [...document.querySelectorAll("form")];
 
 export const galleryContainer = document.querySelector(".gallery__container");
 
+export const avatarContainer = document.querySelector(".profile__avatar");
 export const avatar = document.querySelector("#avatar");
 export const avatarEditDiv = document.querySelector("#avatar-edit-modal");
 
