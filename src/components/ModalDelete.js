@@ -10,6 +10,7 @@ export default class ModalDelete extends Modal {
   open() {
     this._setEventListeners();
     super.open();
+    this._deleteButton.innerText = "Yes";
   }
   _handleCardRemoval = () => {
     this._cardRemovalHandler(this.card);

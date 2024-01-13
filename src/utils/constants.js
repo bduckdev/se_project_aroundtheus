@@ -64,3 +64,5 @@ export const galleryContainer = document.querySelector(".gallery__container");
 
 export const avatar = document.querySelector("#avatar");
 export const avatarEditDiv = document.querySelector("#avatar-edit-modal");
+
+export const deleteModalDiv = document.querySelector("#delete-image-modal");

@@ -55,13 +55,11 @@ const profileEl = new UserInfo({
 
 function handleProfileEditSubmit(e, inputValues) {
   e.preventDefault();
+  consts.profileEditDiv.querySelector(".modal__button").innerText = "Saving...";
   const name = inputValues["Name"];
   const description = inputValues["Description"];
   return api
     .updateProfileInfo(name, description)
-    .then(() => {
-      document.querySelector(".modal__button").innerText = "Saving...";
-    })
     .then(() => {
       profileEl.setUserInfo(name, description);
       formValidation[1].disableSubmitButton();
@@ -72,12 +70,10 @@ function handleProfileEditSubmit(e, inputValues) {
 }
 function handleAvatarEditSubmit(e, inputValues) {
   e.preventDefault();
+  consts.avatarEditDiv.querySelector(".modal__button").innerText = "Saving...";
   const avatar = inputValues["Avatar"];
   return api
     .updateAvatar(avatar)
-    .then(() => {
-      document.querySelector(".modal__button").innerText = "Saving...";
-    })
     .then(() => {
       profileEl.setAvatar(avatar);
     })
@@ -87,12 +83,13 @@ function handleAvatarEditSubmit(e, inputValues) {
 }
 function handleAddCardSubmit(e, inputValues) {
   e.preventDefault();
+  consts.addCardModalDiv.querySelector(".modal__button").innerText =
+    "Saving...";
   const name = inputValues["Title"];
   const link = inputValues["Image Link"];
   return api
     .addCard({ name, link })
     .then((card) => {
-      document.querySelector(".modal__button").innerText = "Saving...";
       return card;
     })
     .then((card) => {
@@ -104,12 +101,12 @@ function handleAddCardSubmit(e, inputValues) {
       console.error(err);
     });
 }
-// random handlers
 function handleDeleteButton(card) {
   deleteModal["card"] = card;
   deleteModal.open();
 }
 function handleCardRemoval(card) {
+  consts.deleteModalDiv.querySelector(".modal__button").innerText = "Saving...";
   return api
     .deleteCard(card._id)
     .then(() => {
@@ -122,6 +119,7 @@ function handleCardRemoval(card) {
       console.error(err);
     });
 }
+// card handlers
 function handleLikeButton(card) {
   if (!card.isLiked) {
     return api
@@ -178,6 +176,36 @@ function handleProfileLoad({ name, about, avatar }) {
   profileEl.setUserInfo(name, about);
   profileEl.setAvatar(avatar);
 }
+function loadAll() {
+  api
+    .initialLoad()
+    .then((data) => {
+      handleProfileLoad(data[0]);
+      return data;
+    })
+    .then((data) => {
+      loadDefaultCards(data[1]);
+    });
+}
+function loadDefaultCards(cardsArr) {
+  if (cardsArr.length != 0) {
+    gallery["items"] = cardsArr;
+    gallery.renderItems();
+  } else {
+    console.log("Gallery empty. Loading default cards...");
+    gallery["items"] = addDefaultCards();
+    gallery.renderItems();
+  }
+}
+function addDefaultCards() {
+  const defaultCards = [];
+  consts.initialCards.forEach((card) => {
+    api.addCard(card);
+    defaultCards.push(card);
+  });
+  return defaultCards;
+}
+
 // validation
 const formValidation = [
   new FormValidator(consts.validatorConfig, consts.addCardModalDiv),
@@ -199,27 +227,4 @@ const gallery = new Section(
   { items: [], renderer: createCard },
   "#gallery-container",
 );
-
-api
-  .initialLoad()
-  .then((data) => {
-    handleProfileLoad(data[0]);
-    return data;
-  })
-  .then((data) => {
-    gallery["items"] = data[1];
-    gallery.renderItems();
-  });
-function loadDefaultCards() {
-  api.getInitialCards().then((data) => {
-    if (data.length != 0) {
-      return;
-    } else {
-      console.log("Loading Default Cards");
-      consts.initialCards.forEach((card) => {
-        api.addCard(card);
-      });
-    }
-  });
-}
-loadDefaultCards();
+loadAll();
