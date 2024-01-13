@@ -64,6 +64,10 @@ function handleProfileEditSubmit(e, inputValues) {
       profileEl.setUserInfo(name, description);
       formValidation[1].disableSubmitButton();
     })
+    .finally(() => {
+      profileEditModal.close();
+      consts.profileEditDiv.querySelector(".modal__button").innerText = "Save";
+    })
     .catch((err) => {
       console.error(err);
     });
@@ -76,6 +80,10 @@ function handleAvatarEditSubmit(e, inputValues) {
     .updateAvatar(avatar)
     .then(() => {
       profileEl.setAvatar(avatar);
+    })
+    .finally(() => {
+      avatarEditModal.close();
+      consts.avatarEditDiv.querySelector(".modal__button").innerText = "Save";
     })
     .catch((err) => {
       console.error(err);
@@ -97,23 +105,28 @@ function handleAddCardSubmit(e, inputValues) {
       gallery.addItem(cardEl);
       formValidation[0].disableSubmitButton();
     })
+    .finally(() => {
+      addCardModal.close();
+      consts.addCardModalDiv.querySelector(".modal__button").innerText = "Save";
+    })
     .catch((err) => {
       console.error(err);
     });
 }
 function handleDeleteButton(card) {
   deleteModal["card"] = card;
-  deleteModal.open();
+  deleteModal.open(card);
 }
 function handleCardRemoval(card) {
   consts.deleteModalDiv.querySelector(".modal__button").innerText = "Saving...";
   return api
     .deleteCard(card._id)
     .then(() => {
-      document.querySelector(".modal__button").innerText = "Saving...";
-    })
-    .then(() => {
       card.removeCard();
+    })
+    .finally(() => {
+      deleteModal.close();
+      consts.deleteModalDiv.querySelector(".modal__button").innerText = "Yes";
     })
     .catch((err) => {
       console.error(err);
@@ -185,6 +198,10 @@ function loadAll() {
     })
     .then((data) => {
       loadDefaultCards(data[1]);
+      return data;
+    })
+    .catch((err) => {
+      console.error(err);
     });
 }
 function loadDefaultCards(cardsArr) {
@@ -200,8 +217,14 @@ function loadDefaultCards(cardsArr) {
 function addDefaultCards() {
   const defaultCards = [];
   consts.initialCards.forEach((card) => {
-    api.addCard(card);
-    defaultCards.push(card);
+    api
+      .addCard(card)
+      .finally((card) => {
+        defaultCards.push(card);
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   });
   return defaultCards;
 }
@@ -222,6 +245,7 @@ addCardModal.setEventListeners();
 profileEditModal.setEventListeners();
 imageModal.setEventListeners();
 avatarEditModal.setEventListeners();
+deleteModal.setEventListeners();
 
 const gallery = new Section(
   { items: [], renderer: createCard },
