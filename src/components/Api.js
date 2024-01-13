@@ -96,12 +96,8 @@ export default class Api {
   initialLoad() {
     const getData = this.getUserData();
     const getCards = this.getInitialCards();
-    return Promise.all([getData, getCards])
-      .then((data) => {
-        return data;
-      })
-      .catch((err) => {
-        console.error(err);
-      });
+    return Promise.all([getData, getCards]).then((data) => {
+      return data;
+    });
   }
 }
