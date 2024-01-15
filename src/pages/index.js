@@ -62,10 +62,12 @@ function handleProfileEditSubmit(e, inputValues) {
     .updateProfileInfo(name, description)
     .then(() => {
       profileEl.setUserInfo(name, description);
-      formValidation[1].disableSubmitButton();
+      formValidators["profile-edit-form"].disableSubmitButton();
+    })
+    .then(() => {
+      profileEditModal.close();
     })
     .finally(() => {
-      profileEditModal.close();
       consts.profileEditDiv.querySelector(".modal__button").innerText = "Save";
     })
     .catch((err) => {
@@ -81,8 +83,11 @@ function handleAvatarEditSubmit(e, inputValues) {
     .then(() => {
       profileEl.setAvatar(avatar);
     })
-    .finally(() => {
+    .then(() => {
+      formValidators["avatar-form"].disableSubmitButton();
       avatarEditModal.close();
+    })
+    .finally(() => {
       consts.avatarEditDiv.querySelector(".modal__button").innerText = "Save";
     })
     .catch((err) => {
@@ -103,10 +108,13 @@ function handleAddCardSubmit(e, inputValues) {
     .then((card) => {
       const cardEl = createCard(card);
       gallery.addItem(cardEl);
-      formValidation[0].disableSubmitButton();
+      formValidators["add-card-form"].disableSubmitButton();
+      avatarEditModal.close();
+    })
+    .then(() => {
+      addCardModal.close();
     })
     .finally(() => {
-      addCardModal.close();
       consts.addCardModalDiv.querySelector(".modal__button").innerText = "Save";
     })
     .catch((err) => {
@@ -124,8 +132,10 @@ function handleCardRemoval(card) {
     .then(() => {
       card.removeCard();
     })
-    .finally(() => {
+    .then(() => {
       deleteModal.close();
+    })
+    .finally(() => {
       consts.deleteModalDiv.querySelector(".modal__button").innerText = "Yes";
     })
     .catch((err) => {
@@ -230,15 +240,17 @@ function addDefaultCards() {
 }
 
 // validation
-const formValidation = [
-  new FormValidator(consts.validatorConfig, consts.addCardModalDiv),
-  new FormValidator(consts.validatorConfig, consts.profileEditDiv),
-  new FormValidator(consts.validatorConfig, consts.avatarEditDiv),
-];
-
-formValidation.forEach((form) => {
-  form.enableValidation();
-});
+const formValidators = {};
+const enableValidation = (config) => {
+  const formList = Array.from(document.querySelectorAll(config.formSelector));
+  formList.forEach((formEl) => {
+    const validator = new FormValidator(config, formEl);
+    const formName = formEl.getAttribute("name");
+    formValidators[formName] = validator;
+    validator.enableValidation();
+  });
+};
+enableValidation(consts.validatorConfig);
 // on page load
 
 addCardModal.setEventListeners();
