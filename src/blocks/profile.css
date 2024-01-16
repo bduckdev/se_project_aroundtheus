@@ -4,12 +4,39 @@
   padding-top: 40px;
 }
 .profile__avatar {
+  display: grid;
+  grid-template-rows: 1fr;
+  grid-template-columns: 1fr;
+  margin-right: 24px;
+  width: 120px;
+  height: 120px;
+}
+.profile__avatar-image {
   width: 120px;
   height: 120px;
   border-radius: 50%;
   object-fit: cover;
   background-position: center;
-  margin-right: 24px;
+  grid-area: overlap;
+}
+.profile__avatar-overlay {
+  height: 120px;
+  width: 120px;
+  grid-area: overlap;
+  object-fit: cover;
+  background-color: black;
+  opacity: 0%;
+  display: grid;
+  transition: 0.2s;
+}
+.profile__avatar-overlay:hover {
+  opacity: 50%;
+}
+.profile__avatar-overlay-icon {
+  height: 28px;
+  width: 28px;
+  align-self: center;
+  justify-self: center;
 }
 .profile__info {
   display: grid;

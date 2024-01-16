@@ -20,7 +20,6 @@ export default class ModalWithForm extends Modal {
     this._modalForm.addEventListener("submit", (e) => {
       const inputValues = this._getInputValues();
       this._handleFormSubmit(e, inputValues);
-      this.close();
     });
     super.setEventListeners();
   }
